@@ -55,7 +55,10 @@
                                 {% if stockMovement.origin == "manual" %}
                                     {{ stockMovement.adminUser.username }}
                                 {% elseif stockMovement.origin == "order" %}
-                                    {{ stockMovement.order.number }}
+                                    <a href="{{ path('sylius_admin_order_show', {'id': stockMovement.order.id}) }}">
+                                        {{ stockMovement.order.number }}
+                                    </a>
+
                                 {% endif %}
                             </td>
 
