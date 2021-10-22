@@ -48,6 +48,8 @@ imports:
     ...
 ```
 
+- Generate and execute the db migrations
+
 ## Screenshots
 
 
