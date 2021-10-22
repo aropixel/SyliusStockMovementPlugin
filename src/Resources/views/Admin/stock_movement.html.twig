@@ -1,0 +1,72 @@
+{% if form.vars.data.variants is defined %}
+    {% set productVariant = form.vars.data.variants | first %}
+{% else %}
+    {% set productVariant = form.vars.data %}
+{% endif %}
+
+{% set stockMovements = getStockMovements(productVariant) %}
+
+<div class="ui one column stackable grid">
+    <div class="column">
+
+        <h3 class="ui top attached header">{{ 'aropixel.admin.product_stock_movement_table.title'|trans }}</h3>
+
+        <div class="ui attached segment">
+
+            {% if stockMovements | length > 0 %}
+
+                <table class="ui stackable table">
+                    <thead>
+                    <tr>
+                        <th style="color: #ababab;">{{ 'aropixel.admin.product_stock_movement_table.date'|trans }}</th>
+                        <th style="color: #ababab;">{{ 'aropixel.admin.product_stock_movement_table.movement'|trans }}</th>
+                        <th style="color: #ababab;">{{ 'aropixel.admin.product_stock_movement_table.stock'|trans }}</th>
+                        <th style="color: #ababab;">{{ 'aropixel.admin.product_stock_movement_table.type'|trans }}</th>
+                        <th style="color: #ababab;">{{ 'aropixel.admin.product_stock_movement_table.origin'|trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for stockMovement in stockMovements %}
+
+                        <tr>
+                            <td>
+                                {{ stockMovement.createdAt | date }}
+                            </td>
+                            <td>
+                                {% if stockMovement.movement > 0 %}
+                                    +{{ stockMovement.movement }}
+                                {% else %}
+                                    {{ stockMovement.movement }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ stockMovement.quantity }}
+                            </td>
+                            <td>
+                                {% if stockMovement.origin == "manual" %}
+                                    {{ 'aropixel.admin.product_stock_movement_table.origin_manual'|trans }}
+                                {% elseif stockMovement.origin == "order" %}
+                                    {{ 'aropixel.admin.product_stock_movement_table.origin_order'|trans }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if stockMovement.origin == "manual" %}
+                                    {{ stockMovement.adminUser.username }}
+                                {% elseif stockMovement.origin == "order" %}
+                                    {{ stockMovement.order.number }}
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            {% endif %}
+        </div>
+
+    </div>
+</div>

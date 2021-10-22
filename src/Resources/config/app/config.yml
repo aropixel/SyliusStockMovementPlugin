@@ -1,0 +1,33 @@
+stof_doctrine_extensions:
+  default_locale: fr_FR
+  orm:
+    default:
+      timestampable: true
+
+
+sylius_resource:
+  resources:
+    aropixel.stock_movement:
+      driver: doctrine/orm
+      classes:
+        model: Aropixel\SyliusStockMovementPlugin\Entity\StockMovement
+        interface: Aropixel\SyliusStockMovementPlugin\Entity\StockMovementInterface
+
+sylius_ui:
+  events:
+    sylius.admin.product_variant.update.tab_inventory:
+      blocks:
+        stock.movement: '@AropixelSyliusStockMovementPlugin/Admin/stock_movement.html.twig'
+    sylius.admin.product.update.tab_inventory:
+      blocks:
+        stock.movement: '@AropixelSyliusStockMovementPlugin/Admin/stock_movement.html.twig'
+
+
+winzou_state_machine:
+  sylius_payment:
+    callbacks:
+      after:
+        aropixel_stock_movement:
+          on: ["complete"]
+          do: ["@aropixel_sylius_stock_movement_plugin.stock_movement_persister", "persistOrderStockMovements"]
+          args: ["object"]

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="aropixel_sylius_stock_movement_plugin.listener.product" class="Aropixel\SyliusStockMovementPlugin\EventListener\ProductListener">
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="onProductPreRegister" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="onProductPreRegister" />
+            <argument type="service" id="aropixel_sylius_stock_movement_plugin.stock_movement_persister"/>
+        </service>
+
+        <service id="aropixel_sylius_stock_movement_plugin.listener.product_variant" class="Aropixel\SyliusStockMovementPlugin\EventListener\ProductVariantListener">
+            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="onProductVariantPreRegister" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="onProductVariantPreRegister" />
+            <argument type="service" id="aropixel_sylius_stock_movement_plugin.stock_movement_persister"/>
+        </service>
+
+        <service id="aropixel_sylius_stock_movement_plugin.stock_movement_persister" class="Aropixel\SyliusStockMovementPlugin\Persister\StockMovementPersister" public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="aropixel_sylius_stock_movement_plugin.stock_movement_factory"/>
+        </service>
+
+        <service id="aropixel_sylius_stock_movement_plugin.stock_movement_factory" class="Aropixel\SyliusStockMovementPlugin\Factory\StockMovementFactory">
+            <argument type="service" id="security.helper"/>
+        </service>
+
+        <service id="aropixel_sylius_stock_movement_plugin.repository.stock_movement" class="Aropixel\SyliusStockMovementPlugin\Repository\StockMovementRepository">
+            <argument type="service" id="doctrine"/>
+            <argument>%aropixel.model.stock_movement.class%</argument>
+        </service>
+
+
+        <service id="aropixel_sylius_stock_movement_plugin.twig_extension.stock_movement" class="Aropixel\SyliusStockMovementPlugin\Twig\StockMovementExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="aropixel_sylius_stock_movement_plugin.repository.stock_movement"/>
+        </service>
+
+    </services>
+</container>

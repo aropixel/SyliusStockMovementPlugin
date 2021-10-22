@@ -1,0 +1,11 @@
+aropixel:
+    admin:
+        product_stock_movement_table:
+            title: Historique des mouvements de stock
+            date: Date
+            stock: Stock
+            movement: Mouvement
+            type: Type
+            origin: Origine
+            origin_manual: Manuel
+            origin_order: Commande
