@@ -1,4 +1,6 @@
-## Description
+![Screenshot](https://avatars1.githubusercontent.com/u/14820816?s=200&v=4)
+
+## Aropixel Sylius Stock Movement Plugin
 
 Log and display the product stock movements. When the stock of a product is updated, the stock movement will be saved 
 and displayed in the admin product stock tab. The origin of the stock update is also displayed (either a new order or a manual update).
