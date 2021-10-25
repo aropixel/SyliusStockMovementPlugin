@@ -17,7 +17,14 @@ and displayed in the admin product stock tab. The origin of the stock update is 
 composer require aropixel/sylius-stock-movement-plugin
 ```
 
-- Add the StockMovement interface and trait to your ProductVariant Entity: 
+- import the plugin config in a new "aropixel_sylius_stock_movement.yaml" file inside 'config/packages':
+
+```yaml
+imports:
+    - { resource: "@AropixelSyliusStockMovementPlugin/Resources/config/app/config.yml" }
+```
+
+- Add the StockMovement interface and trait to your ProductVariant entity: 
 
 ```php
     ...
@@ -40,6 +47,8 @@ composer require aropixel/sylius-stock-movement-plugin
 
     ...
 ```
+
+- Generate and execute the db migrations
 
 ## Screenshots
 
