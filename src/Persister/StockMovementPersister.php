@@ -5,9 +5,8 @@ namespace Aropixel\SyliusStockMovementPlugin\Persister;
 
 use Aropixel\SyliusStockMovementPlugin\Factory\StockMovementFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Order\Model\OrderItem;
-use Sylius\Component\Payment\Model\PaymentInterface;
 
 class StockMovementPersister implements StockMovementPersisterInterface
 {
@@ -35,11 +34,9 @@ class StockMovementPersister implements StockMovementPersisterInterface
         $this->entityManager->flush();
     }
 
-    public function persistOrderStockMovements(PaymentInterface $payment): void
+    public function persistOrderStockMovements(OrderInterface $order): void
     {
-        $order = $payment->getOrder();
-
-        foreach ($payment->getOrder()->getItems() as $orderItem) {
+        foreach ($order->getItems() as $orderItem) {
             /** @var ProductVariantInterface $variant */
             $productVariant = $orderItem->getVariant();
 

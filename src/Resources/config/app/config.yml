@@ -23,11 +23,11 @@ sylius_ui:
         stock.movement: '@AropixelSyliusStockMovementPlugin/Admin/stock_movement.html.twig'
 
 
-winzou_state_machine:
-  sylius_payment:
-    callbacks:
-      after:
-        aropixel_stock_movement:
-          on: ["complete"]
-          do: ["@aropixel_sylius_stock_movement_plugin.stock_movement_persister", "persistOrderStockMovements"]
-          args: ["object"]
+#winzou_state_machine:
+#  sylius_payment:
+#    callbacks:
+#      after:
+#        aropixel_stock_movement:
+#          on: ["complete"]
+#          do: ["@aropixel_sylius_stock_movement_plugin.stock_movement_persister", "persistOrderStockMovements"]
+#          args: ["object"]

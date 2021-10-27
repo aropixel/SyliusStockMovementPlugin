@@ -29,10 +29,15 @@
             <argument>%aropixel.model.stock_movement.class%</argument>
         </service>
 
-
         <service id="aropixel_sylius_stock_movement_plugin.twig_extension.stock_movement" class="Aropixel\SyliusStockMovementPlugin\Twig\StockMovementExtension">
             <tag name="twig.extension"/>
             <argument type="service" id="aropixel_sylius_stock_movement_plugin.repository.stock_movement"/>
+        </service>
+
+
+        <service id="aropixel_sylius_stock_movement_plugin.order_inventory_operator" class="Aropixel\SyliusStockMovementPlugin\Inventory\Operator\OrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator" public="false">
+            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+            <argument type="service" id="aropixel_sylius_stock_movement_plugin.stock_movement_persister"/>
         </service>
 
     </services>

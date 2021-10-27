@@ -4,11 +4,12 @@
 namespace Aropixel\SyliusStockMovementPlugin\Persister;
 
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+
 
 interface StockMovementPersisterInterface
 {
     public function persistManualStockMovement(ProductVariantInterface $productVariant): void;
 
-    public function persistOrderStockMovements(PaymentInterface $payment): void;
+    public function persistOrderStockMovements(OrderInterface $payment): void;
 }
