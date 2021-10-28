@@ -27,5 +27,14 @@ trait ProductVariantMovementTrait
         return $this->getOnHand() - $this->getOldOnHand();
     }
 
+    public function isStockUpdated(): bool
+    {
+        if (!is_null($this->getOldOnHand())) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
