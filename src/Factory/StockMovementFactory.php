@@ -29,7 +29,7 @@ class StockMovementFactory implements StockMovementFactoryInterface
 
         $stockMovement = new StockMovement();
         $stockMovement->setProductVariant($productVariant);
-        $stockMovement->setQuantity($productVariant->getOnHand());
+        $stockMovement->setQuantity((int)$productVariant->getOnHand());
         $stockMovement->setMovement($productVariant->getStockMovement());
         $stockMovement->setOrigin(StockMovement::ORIGIN_MANUAL);
         $stockMovement->setAdminUser($adminUser);

@@ -11,7 +11,7 @@ trait ProductVariantMovementTrait
     /**
      * @return mixed
      */
-    public function getOldOnHand(): int
+    public function getOldOnHand(): ?int
     {
         return $this->oldOnHand;
     }
@@ -19,7 +19,7 @@ trait ProductVariantMovementTrait
     public function setOnHand(?int $onHand): void
     {
         $this->oldOnHand = $this->onHand;
-        $this->onHand = (0 > $onHand) ? 0 : $onHand;
+        $this->onHand = (0 > (int)$onHand) ? 0 : (int)$onHand;
     }
 
     public function getStockMovement(): int

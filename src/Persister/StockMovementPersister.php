@@ -31,7 +31,6 @@ class StockMovementPersister implements StockMovementPersisterInterface
     {
         $stockMovement = $this->stockMovementFactory->createManualStockMovement($productVariant);
         $this->entityManager->persist($stockMovement);
-        $this->entityManager->flush();
     }
 
     public function persistOrderStockMovements(OrderInterface $order): void
